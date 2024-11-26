@@ -41,15 +41,18 @@ $$
 DECLARE
     v_parent_rec RECORD;
 begin
-
     FOR v_parent_rec IN (
-      select q.* , 'DROP TABLE ' || q.part_name as sql_query
+            select q.* , 'DROP TABLE ' || q.part_name as sql_query
                 from (
                   SELECT cast( inhrelid::regclass as varchar) AS part_name
-                    ,to_date ( replace(cast( inhrelid::regclass as varchar),T_NAME,''),'yyyy_mm_dd') as dt
+                    ,to_date (  replace(  cast( inhrelid::regclass as varchar)
+                             ,case when ( S_NAME = 'public' or S_NAME = '' ) then ''
+                                   else S_NAME || '.'
+                                   end ||
+                                   T_NAME,'') ,'yyyy_mm_dd') as dt                                   
                   FROM   pg_catalog.pg_inherits i
-                  WHERE  inhparent = (S_NAME || '.' || T_NAME)::regclass ) q
-                where q.dt < current_date - days_ago )
+                  WHERE  inhparent = ( S_NAME || '.' || T_NAME )::regclass ) q
+                where q.dt < current_date - days_ago  )
     LOOP
         EXECUTE v_parent_rec.sql_query ;
     END LOOP;
