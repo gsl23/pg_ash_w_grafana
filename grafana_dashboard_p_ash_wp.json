@@ -290,7 +290,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "with q  as ( select \r\n   h.query, h.query_id, count(1) as avg_activity, round(avg(h.duration)) as avg_duration_ms  , date_trunc('second', h.sample_time) as sample_time\r\nfrom adm.pg_stat_activity_history h \r\nwhere $__timeFilter( h.sample_time )   and COALESCE(wait_event_type ,'[NULL]') in ($wait_event_type) \r\ngroup by h.query , h.query_id, date_trunc('second', h.sample_time)  ) \r\nselect round( sum(q.avg_activity) / (select count(distinct sample_time) from q) ,3) as avg_activity\r\n  ,max(avg_duration_ms) as max_duration_ms \r\n  ,q.query_id::text\r\n  ,substr(query, 1, 500 ) as query_substr1000 \r\nfrom q \r\ngroup by q.query, q.query_id order by 1 desc ;",
+          "rawSql": "with q  as ( select \r\n   h.query, h.query_id, count(1) as avg_activity\r\n    ,round(avg(h.duration)) as avg_duration_ms \r\n    ,date_trunc('second', h.sample_time) as sample_time\r\n    ,h.datid \r\nfrom adm.pg_stat_activity_history h \r\nwhere $__timeFilter( h.sample_time )   and COALESCE(wait_event_type ,'[NULL]') in ($wait_event_type) \r\ngroup by h.datid, h.query , h.query_id, date_trunc('second', h.sample_time)   ) \r\nselect round( sum(q.avg_activity) / (select count(distinct sample_time) from q) ,3) as avg_activity\r\n  ,max(avg_duration_ms) as max_duration_ms \r\n  ,d.datname \r\n  ,q.query_id::text\r\n  ,substr(query, 1, 500 ) as query_substr1000   \r\nfrom q left join pg_catalog.pg_database d on q.datid = d.oid \r\ngroup by d.datname, q.query, q.query_id order by 1 desc ;",
           "refId": "A",
           "sql": {
             "columns": [
