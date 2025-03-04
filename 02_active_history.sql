@@ -1,4 +1,4 @@
-CREATE SCHEMA adm AUTHORIZATION postgres;
+-- CREATE SCHEMA adm AUTHORIZATION postgres;
 
 CREATE TABLE adm.pg_stat_activity_history (
         sample_time timestamptz ,
