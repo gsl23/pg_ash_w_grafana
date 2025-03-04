@@ -17,6 +17,6 @@ pg_cron extension must be installed.
 
 3. Setup Grafana dashboard
    
-   2.1 Add datasource through user with select sgrants on postrgres database, table adm.pg_stat_activity_history.
+   2.1 Add postgresql datasource to your grafana through user with select grant on postrgres database, table adm.pg_stat_activity_history.
    
-   2.2 Add new dashboard : : New ->  Upload dashboard JSON file -> grafana_dashboard_p_ash_wp.json 
+   2.2 Add new dashboard : New ->  Upload dashboard JSON file -> grafana_dashboard_p_ash_wp.json 
