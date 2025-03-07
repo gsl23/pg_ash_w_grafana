@@ -1,4 +1,4 @@
-# pg_ash_w_grafana
+# pg_ash_w_grafana - Postgres Active Session History Grafana dashboard 
 
 Active session history in Postgresql with partitioning and grafana visualisation. 
 Tested in postgresql v15.3 and Grafana v11.2.0. 
