@@ -3,6 +3,8 @@
 Active session history in Postgresql with partitioning and grafana visualisation. 
 Tested in postgresql v15.3 and Grafana v11.2.0. 
 
+<img width="1560" height="491" alt="image" src="https://github.com/user-attachments/assets/f5a0b94d-49cf-41f1-a84e-df2483845e96" />
+
 **Prerequirements. **
 
 pg_cron extension must be installed. 
