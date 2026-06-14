@@ -7,8 +7,7 @@ Tested in postgresql v15.3 and Grafana v11.2.0.
 
 **Prerequirements. **
 
-pg_cron extension must be installed. 
-
+[pg_cron](https://github.com/citusdata/pg_cron) extension must be installed. 
 
 **Installation. **
 1. Install .sql files through postgres user in order :
